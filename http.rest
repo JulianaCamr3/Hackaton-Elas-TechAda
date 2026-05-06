@@ -10,6 +10,6 @@ Content-Type: application/json
 ####
 GET  http://localhost:8080/user/list
 ####
-DELETE  http://localhost:8080/user/delete/0328fc47-b7fb-41fb-b03b-14ed57407978
+DELETE  http://localhost:8080/user/delete/9aba4e25-0626-459d-971c-284e75979037
 ####
 GET  http://localhost:8080/h2-console
