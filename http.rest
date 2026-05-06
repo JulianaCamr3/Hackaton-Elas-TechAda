@@ -1,0 +1,15 @@
+####
+POST  http://localhost:8080/user/save
+Content-Type: application/json
+
+{
+    "username": "teste",
+    "email": "email",
+    "hash": "hash gerado durante a criação de senha do usuário"
+}
+####
+GET  http://localhost:8080/user/list
+####
+DELETE  http://localhost:8080/user/delete/0328fc47-b7fb-41fb-b03b-14ed57407978
+####
+GET  http://localhost:8080/h2-console
