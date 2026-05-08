@@ -10,6 +10,8 @@ Content-Type: application/json
 ####
 GET  http://localhost:8080/user/list
 ####
+GET  http://localhost:8080/test-ingestion
+####
 DELETE  http://localhost:8080/user/delete/9aba4e25-0626-459d-971c-284e75979037
 ####
 GET  http://localhost:8080/h2-console

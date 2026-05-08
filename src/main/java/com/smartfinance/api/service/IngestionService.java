@@ -24,29 +24,29 @@ public class IngestionService {
     public void runIngestion(UserEntity user) {
         // Lista de URLs das suas APIs simuladas (Mocks)
         List<String> urls = List.of(
-            "https://api.mock.com/netflix",
-            "https://api.mock.com/amazonPrime",
-            "https://api.mock.com/disney",
-            "https://api.mock.com/xbox",
-            "https://api.mock.com/spotify"
+        "http://localhost:8080/stream-api/netflix",
+        "http://localhost:8080/stream-api/disney",
+        "http://localhost:8080/stream-api/spotify",
+        "http://localhost:8080/stream-api/amazonPrime",
+        "http://localhost:8080/stream-api/xbox"
         );
-
-        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-            for (String url : urls) {
-                executor.submit(() -> {
-                    try {
-                        // 1. Consome a API e mapeia para o Record
-                        StreamingDTO data = restTemplate.getForObject(url, StreamingDTO.class);
-                        if (data != null) {
-                            processAndSave(data, user);
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Erro ao consumir " + url + ": " + e.getMessage());
+    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+        for (String url : urls) {
+            executor.submit(() -> {
+                try {
+                    // O RestTemplate chama o seu próprio Controller
+                    System.out.println("Consumindo: " + Thread.currentThread().getName() + " - " + url);
+                    StreamingDTO data = restTemplate.getForObject(url, StreamingDTO.class);
+                    if (data != null) {
+                        processAndSave(data, user);
                     }
-                });
-            }
+                } catch (Exception e) {
+                    System.err.println("Error when consuming " + url + ": " + e.getMessage());
+                }
+            });
         }
     }
+}
 
     private void processAndSave(StreamingDTO record, UserEntity user) {
         // 2. Deduplicação: Verifica se o ID externo já existe
