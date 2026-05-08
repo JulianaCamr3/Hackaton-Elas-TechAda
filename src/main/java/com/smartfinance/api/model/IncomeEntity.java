@@ -8,6 +8,8 @@ import java.util.UUID;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
@@ -18,20 +20,21 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "income")
-public class IncomeEnity {
+//  Income é o dinheiro ganho (salário, vendas)
+public class IncomeEntity {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name="userID")
-    private UUID userID;
+    @ManyToOne
+    @JoinColumn(name = "income_user", nullable = false)
+    private UserEntity income_user;
 
     @Column(name = "amount")
     private double amount;
 
-    LocalDateTime transitionDate = LocalDateTime.now();
     @Column(name = "date")
-    private String date = transitionDate.toString();
+     private LocalDateTime transitionDate = LocalDateTime.now();
 }
