@@ -6,6 +6,7 @@ public record StreamingDTO(
     UUID externalID, 
     String category, 
     String serviceName,
+    String description,
     Double price,
     String billingDate
 ) {
