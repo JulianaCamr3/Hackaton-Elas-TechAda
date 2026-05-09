@@ -1,8 +1,6 @@
 ## Hackaton-Elas-TechAda
 Projeto desenvolvido para o Hackaton do Elas+Tech Ada em parceria com a Caixa. 
-No projeto será desenvolvido um gerenciador financeiro com IA em que a aplicação recebe
-gastos/receitas, salva no banco de dados, sugere melhorias financeiras e responde perguntas em 
-linguagem natural com LLM.
+No projeto, o tema "Ingestão e Normalização de Dados Financeiros" foi o escolhido e a partir desse tema, criou-se uma API que vai cadastrar e analisar os dados financeiros de clientes em relação a assinaturas de streaming, analisando quais dessas assinaturas os clientes possuem, o custo delas mensalmente e o custo total pelo tempo ativo. Essa análise é importante para verificar o impacto financeiro dessas assinaturas no orçamento dos usuários.
 
 ##  Tecnologias
 - **Java 21 LTS**
