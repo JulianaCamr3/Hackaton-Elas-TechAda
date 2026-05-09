@@ -19,7 +19,7 @@ Content-Type: application/json
 ####
 GET  http://localhost:8080/user/list
 ####
-GET  http://localhost:8080/test-ingestion
+GET http://localhost:8080/ingestion/a4b55e36-a0de-45ca-9324-b30cba87e09a
 ####
 DELETE  http://localhost:8080/user/delete/9aba4e25-0626-459d-971c-284e75979037
 ####

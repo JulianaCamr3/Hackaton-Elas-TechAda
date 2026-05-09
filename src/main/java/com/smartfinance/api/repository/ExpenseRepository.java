@@ -12,13 +12,17 @@ import com.smartfinance.api.model.ExpenseEntity;
 import com.smartfinance.api.model.UserEntity;
 
 @Repository
-public interface ExpenseRepository extends JpaRepository<ExpenseEntity, UUID > {
+public interface ExpenseRepository extends JpaRepository<ExpenseEntity, UUID> {
+
+    // 1. Verificação de duplicidade (Corrigido para o padrão CamelCase do Spring Data)
+    boolean existsByExternalIDAndExpenseUser(UUID externalID, UserEntity user);
     
-    // soma dos gastos por categoria
-    @Query("SELECT SUM(e.amount) FROM ExpenseEntity e WHERE e.expense_user =: expense_user AND  e.category = :category")
+    // 2. Soma dos gastos por categoria
+    @Query("SELECT SUM(e.amount) FROM ExpenseEntity e WHERE e.expenseUser = :user AND e.category = :category")
     Double sumAmountByUserAndCategory(@Param("user") UserEntity user, @Param("category") String category);
     
-    // soma dos gastos por período
-    @Query("SELECT SUM(e.date) FROM ExpenseEntity e WHERE e.expense_user =: expense_user AND e.date >= date")
-    Double sumTotalSpentLast30Days(@Param("user") UserEntity user, @Param("date") LocalDateTime date);
+    // 3. Soma dos gastos por período
+    @Query("SELECT SUM(e.amount) FROM ExpenseEntity e WHERE e.expenseUser = :user AND e.date >= :startDate")
+    Double sumTotalSpentSince(@Param("user") UserEntity user, @Param("startDate") LocalDateTime startDate);
+
 }

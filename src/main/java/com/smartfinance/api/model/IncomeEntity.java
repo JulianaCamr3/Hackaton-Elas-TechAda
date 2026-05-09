@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,29 +12,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
-
 @Getter
 @Setter
 @Entity
-@Table(name = "income")
-//  Income é o dinheiro ganho (salário, vendas)
+@Table(name = "income", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"income_user"}) // Nome da coluna física no banco
+})
 public class IncomeEntity {
-    private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "income_user", nullable = false)
+    @JoinColumn(name = "income_user", nullable = false) // Use snake_case para evitar erros no SQL
     @JsonBackReference
-    private UserEntity income_user;
+    private UserEntity incomeUser;
 
-    @Column(name = "amount")
     private double amount;
-
-    @Column(name = "date")
-     private LocalDateTime transitionDate = LocalDateTime.now();
+    private LocalDateTime transitionDate = LocalDateTime.now();
 }

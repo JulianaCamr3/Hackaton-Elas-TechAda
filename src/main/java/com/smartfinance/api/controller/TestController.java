@@ -1,7 +1,10 @@
 package com.smartfinance.api.controller;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.smartfinance.api.model.UserEntity;
@@ -16,10 +19,12 @@ public class TestController {
     @Autowired
     private IngestionService ingestionService;
 
-    @GetMapping("/test-ingestion")
-public String test() {
-    UserEntity user = userRepository.findAll().get(0); // Pega o primeiro usuário existente
+@GetMapping("/ingestion/{userId}")
+public String test(@PathVariable UUID userId) { // Use UUID aqui se o seu banco usa UUID
+    UserEntity user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + userId));
+    
     ingestionService.runIngestion(user);
-    return "Ingestão disparada! Verifique o console e o banco.";
+    return "Ingestão disparada para: " + user.getUsername();
 }
 }

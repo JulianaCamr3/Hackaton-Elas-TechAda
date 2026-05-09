@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-import org.hibernate.annotations.Collate;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +25,7 @@ import lombok.Setter;
 public class UserEntity  implements Serializable {
     
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -39,10 +39,11 @@ public class UserEntity  implements Serializable {
     @Column(name ="email", nullable = false)
     private String email;
     
-    @OneToMany(mappedBy = "expense_user")
-    private List<ExpenseEntity> expenses_user;
+    @OneToMany(mappedBy = "expenseUser")
+    @JsonManagedReference
+    private List<ExpenseEntity> expensesUser;
     
-    @OneToMany(mappedBy = "income_user")
-    private List<IncomeEntity> incomes_user;
+    @OneToMany(mappedBy = "incomeUser")
+    private List<IncomeEntity> incomesUser;
     
 }

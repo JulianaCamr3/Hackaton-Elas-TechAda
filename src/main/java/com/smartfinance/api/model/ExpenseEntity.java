@@ -13,17 +13,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "expense")
-//  Expense é o gasto para manter operações ou estilo de vida
+@Table(name = "expenses", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"external_id", "user_id"})
+})
 public class ExpenseEntity {
     private static final long serialVersionUID = 1L;
-   
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -31,16 +33,16 @@ public class ExpenseEntity {
     @Column(name = "category")
     private String category;
     
-    @Column(name = "external_id", unique = true, nullable = false)   
+    @Column(name = "external_id", nullable = false)
     private UUID externalID;
     
     @Column(name = "date")
     private LocalDateTime date = LocalDateTime.now();
-        
+    
     @ManyToOne
-    @JoinColumn(name = "expense_user", nullable = false)
+    @JoinColumn(name = "expenseUser", nullable = false)
     @JsonBackReference
-    private UserEntity expense_user;
+    private UserEntity expenseUser;
 
     @Column(name = "amount")
     private double amount;
