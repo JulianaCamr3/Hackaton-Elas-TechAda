@@ -3,14 +3,14 @@ package com.smartfinance.api.service;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import com.smartfinance.api.domain.entity.Expense;
+import com.smartfinance.api.domain.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.smartfinance.api.dto.StreamingDTO;
-import com.smartfinance.api.model.ExpenseEntity;
-import com.smartfinance.api.model.UserEntity;
-import com.smartfinance.api.repository.ExpenseRepository;
+import com.smartfinance.api.domain.repository.ExpenseRepository;
 
 @Service
 public class IngestionService {
@@ -21,7 +21,7 @@ public class IngestionService {
     @Autowired
     private ExpenseRepository expenseRepository;
 
-    public void runIngestion(UserEntity user) {
+    public void runIngestion(User user) {
         // Lista de URLs das suas APIs simuladas (Mocks)
         List<String> urls = List.of(
         "http://localhost:8080/stream-api/netflix",
@@ -48,11 +48,11 @@ public class IngestionService {
     }
 }
 
-    private void processAndSave(StreamingDTO record, UserEntity user) {
+    private void processAndSave(StreamingDTO record, User user) {
         // 2. Deduplicação: Verifica se o ID externo já existe
         if (!expenseRepository.existsById(record.externalID())) {
             // 3. Normalização: Converte Record para Entity
-            ExpenseEntity expense = new ExpenseEntity();
+            Expense expense = new Expense();
             expense.setExternalID(record.externalID());
             expense.setDescription(record.description());
             expense.setAmount(record.price());

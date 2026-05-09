@@ -1,4 +1,4 @@
-package com.smartfinance.api.model;
+package com.smartfinance.api.domain.entity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "income")
 //  Income é o dinheiro ganho (salário, vendas)
-public class IncomeEntity {
+public class Income {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -31,11 +31,11 @@ public class IncomeEntity {
     @ManyToOne
     @JoinColumn(name = "income_user", nullable = false)
     @JsonBackReference
-    private UserEntity income_user;
+    private User income_user;
 
     @Column(name = "amount")
     private double amount;
 
     @Column(name = "date")
-     private LocalDateTime transitionDate = LocalDateTime.now();
+    private LocalDateTime transitionDate = LocalDateTime.now();
 }

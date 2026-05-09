@@ -3,13 +3,12 @@ package com.smartfinance.api.service;
 import java.util.List;
 import java.util.UUID;
 
+import com.smartfinance.api.domain.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Service;
 
 import com.smartfinance.api.exception.NotFoundException;
-import com.smartfinance.api.model.UserEntity;
-import com.smartfinance.api.repository.UserRepository;
+import com.smartfinance.api.domain.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -19,11 +18,11 @@ public class UserService {
     @Autowired
     UserRepository userRepository; 
 
-    public UserEntity saveUser(UserEntity userEntity){
+    public User saveUser(User userEntity){
         return userRepository.save(userEntity);
     }
 
-    public List<UserEntity> allUsers(){
+    public List<User> allUsers(){
         return userRepository.findAll();
     }
 

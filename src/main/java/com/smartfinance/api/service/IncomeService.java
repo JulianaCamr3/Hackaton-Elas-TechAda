@@ -3,12 +3,12 @@ package com.smartfinance.api.service;
 import java.util.List;
 import java.util.UUID;
 
+import com.smartfinance.api.domain.entity.Income;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smartfinance.api.exception.NotFoundException;
-import com.smartfinance.api.model.IncomeEntity;
-import com.smartfinance.api.repository.IncomeRepository;
+import com.smartfinance.api.domain.repository.IncomeRepository;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -17,11 +17,11 @@ public class IncomeService {
     @Autowired
     IncomeRepository incomeRepository; 
 
-    public IncomeEntity saveIncome(IncomeEntity IncomeEntity){
-        return incomeRepository.save(IncomeEntity);
+    public Income saveIncome(Income incomeEntity){
+        return incomeRepository.save(incomeEntity);
     }
 
-    public List<IncomeEntity> allIncomes(){
+    public List<Income> allIncomes(){
         return incomeRepository.findAll();
     }
 

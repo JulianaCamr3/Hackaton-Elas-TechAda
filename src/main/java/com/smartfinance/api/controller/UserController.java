@@ -3,6 +3,7 @@ package com.smartfinance.api.controller;
 import java.util.List;
 import java.util.UUID;
 
+import com.smartfinance.api.domain.entity.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity; 
 
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.smartfinance.api.model.UserEntity;
 import com.smartfinance.api.service.UserService;
 
 
@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveUser(@RequestBody UserEntity userEntity ){ 
+    public ResponseEntity<?> saveUser(@RequestBody User userEntity ){
         userService.saveUser(userEntity);
 
         return ResponseEntity
@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<UserEntity>> getAllUsers(){
+    public ResponseEntity<List<User>> getAllUsers(){
         return ResponseEntity
         .status(HttpStatus.ACCEPTED)
         .body(userService.allUsers());

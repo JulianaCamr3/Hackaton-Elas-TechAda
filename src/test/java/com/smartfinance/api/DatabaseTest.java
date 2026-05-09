@@ -1,10 +1,10 @@
 package com.smartfinance.api;
 
+import com.smartfinance.api.domain.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.smartfinance.api.model.UserEntity;
-import com.smartfinance.api.repository.UserRepository;
+import com.smartfinance.api.domain.repository.UserRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 public class DatabaseTest {
@@ -14,7 +14,7 @@ public class DatabaseTest {
 
     @Test
     void saveUser(){
-        UserEntity userEntity = new UserEntity();
+        User userEntity = new User();
 
         userEntity.setEmail("email");
         userEntity.setHash("null");
