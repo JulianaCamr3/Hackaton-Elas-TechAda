@@ -59,7 +59,7 @@ public class IngestionService {
             expense.setCategory(record.category().toUpperCase());
             expense.setExpense_user(user);
             expenseRepository.save(expense);
-            System.out.println("Salvo: " + record.serviceName());
+            System.out.println("Saved: " + record.serviceName());
         }
     }
 }

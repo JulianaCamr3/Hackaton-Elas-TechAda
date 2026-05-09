@@ -3,9 +3,18 @@ POST  http://localhost:8080/user/save
 Content-Type: application/json
 
 {
-    "username": "teste",
-    "email": "email",
-    "hash": "hash gerado durante a criação de senha do usuário"
+  "username": "teste1",
+  "email": "email",
+  "hash": "hash gerado durante a criação de senha do usuário"
+}
+####
+POST  http://localhost:8080/user/save
+Content-Type: application/json
+
+{
+  "username": "teste2",
+  "email": "email",
+  "hash": "hash gerado durante a criação de senha do usuário"
 }
 ####
 GET  http://localhost:8080/user/list

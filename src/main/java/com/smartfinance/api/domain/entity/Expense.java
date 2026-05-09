@@ -32,7 +32,7 @@ public class Expense implements Serializable {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "externalID")
+    @Column(name = "external_id", unique = true, nullable = false)
     private UUID externalID;
 
     @Column(name = "date")
